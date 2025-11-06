@@ -1,85 +1,355 @@
-main {
-  display: flex;
-  flex-wrap: wrap;                /* allows cards to wrap nicely on smaller screens */
-  justify-content: center;        /* center cards instead of left-aligned */
-  gap: 25px;                      /* clean space between cards */
-  padding: 30px 20px;
-  min-height: 70vh;
+/* =========================
+   GLOBAL RESET & TYPOGRAPHY
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Individual Car Card */
+html, body {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #f8f9fb;
+  color: #111;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #111;
+}
+
+p {
+  color: #444;
+  line-height: 1.6;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #1d4ed8;
+}
+
+/* =========================
+   HEADER & NAV
+========================= */
+header {
+  width: 100%;
+  background: #fff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e1e1e1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .header-logo-container {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #2563eb;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+nav li a, nav li button {
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  transition: color 0.2s ease;
+}
+
+nav li a:hover, nav li button:hover {
+  color: #1d4ed8;
+}
+
+nav form {
+  display: inline;
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+main {
+  width: 100%;
+  max-width: 1300px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+section {
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.btn.warn { background: #fbbf24; }
+.btn.danger { background: #ef4444; }
+.btn.submit { background: #10b981; }
+
+/* =========================
+   CARDS
+========================= */
 .card {
-  width: 250px;
-  height: 250px;
-  border-radius: 12px;
-  border: 1.5px solid rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  position: relative;
+  background: #fff;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Background image overlay */
-.card-bg {
-  opacity: 0.25;
-  position: absolute;
-  inset: 0; /* shorthand for top/left/right/bottom: 0 */
-  background-size: cover;
-  background-position: center;
-  transition: opacity 0.2s ease;
-}
-
-.card:hover .card-bg {
-  opacity: 0.4;
-}
-
-/* Content on top of the image */
-.card-content {
-  position: relative;
-  z-index: 1;
-  padding: 15px;
-  height: 100%;
+.card img {
   width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* =========================
+   CAR INDEX PAGE
+========================= */
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.car-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  background: linear-gradient(to top, rgba(255,255,255,0.9) 30%, rgba(255,255,255,0.3) 90%);
-  border-radius: 12px;
-  color: var(--text-color);
+  text-decoration: none;
+  color: #111;
 }
 
-.card h2 {
-  margin: 5px 0 2px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #1e293b;
+.car-image img {
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
 }
 
-.card p {
-  margin: 0;
+.car-info {
+  padding: 0.8rem 1rem;
+}
+
+.car-info h2 {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.car-info p {
+  font-size: 1.2rem;
+  margin: 2px 0;
+  color: #444;
+}
+
+.car-info small {
+  font-size: 1rem;
+  color: #777;
+}
+
+.no-cars {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* =========================
+   CAR DETAIL PAGE
+========================= */
+.car-container {
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 0 auto;
+}
+
+.car-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.car-header img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  border-radius: 5px;
+}
+
+.car-header h1 {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.car-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.car-details p {
+  font-size: 1.2rem;
+}
+
+.car-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.meta-box {
+  background: #f1f4f8;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  text-align: center;
+  flex: 1 1 150px;
+  max-width: 200px;
+}
+
+.meta-box h3 {
   font-size: 1.4rem;
-  color: #475569;
+  margin-bottom: 0.2rem;
 }
 
-/* Button inside card */
-.card .btn {
-  margin-top: 10px;
-  align-self: flex-start;
-  font-size: 1.3rem;
-  background-color: var(--nav-bg-ff);
-  color: white;
+.meta-box p {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #555;
+}
+
+.car-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.car-actions a,
+.car-actions button {
+  text-decoration: none;
   border: none;
-  border-radius: 6px;
-  padding: 6px 10px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
   transition: background-color 0.2s ease;
+  border-radius: 5px;
 }
 
-.card .btn:hover {
-  background-color: var(--link-hover-color);
+.car-actions a:hover,
+.car-actions button:hover {
+  background-color: #1d4ed8;
+}
+
+/* =========================
+   MEDIA QUERIES
+========================= */
+@media (min-width: 768px) {
+  .page-header h1 { font-size: 2.8rem; }
+  .subtitle { font-size: 1.4rem; }
+  .car-info h2 { font-size: 1.8rem; }
+  .car-info p { font-size: 1.4rem; }
+  .car-info small { font-size: 1.2rem; }
+
+  .car-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .car-header img { width: 45%; max-width: 450px; margin-right: 2rem; }
+  .car-header h1 { font-size: 2.5rem; margin-top: 0; }
+
+  .car-details { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+  .car-details p { flex: 1; }
+}
+
+@media (min-width: 1200px) {
+  .page-header h1 { font-size: 3rem; }
+  .subtitle { font-size: 1.6rem; }
+  .car-info h2 { font-size: 2rem; }
+  .car-info p { font-size: 1.5rem; }
+  .car-info small { font-size: 1.4rem; }
+  .car-container { padding: 3rem; }
+  .car-header h1 { font-size: 3rem; }
+  .meta-box h3 { font-size: 1.6rem; }
+  .meta-box p { font-size: 1.4rem; }
+  .car-actions a, .car-actions button { font-size: 1.5rem; padding: 1rem 2rem; }
 }

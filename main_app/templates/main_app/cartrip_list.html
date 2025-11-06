@@ -9,24 +9,23 @@
 
 <section class="page-header">
   <h1>All Car Trips</h1>
+  <p class="subtitle">Browse all trips you've recorded</p>
 </section>
 
 <section class="card-container">
   {% for trip in cartrip_list %}
-    <div class="card">
-      <a href="{% url 'cartrip-detail' trip.id %}">
-        <div class="card-content">
-          <h2>{{ trip.event_name }}</h2>
-          <p>{{ trip.location }}</p>
-          <p>{{ trip.date }}</p>
-          {% if trip.notes %}
-            <p><em>{{ trip.notes }}</em></p>
-          {% endif %}
-        </div>
-      </a>
-    </div>
+    <a href="{% url 'cartrip-detail' trip.id %}" class="card">
+      <div class="card-content">
+        <h2>{{ trip.event_name }}</h2>
+        <p class="trip-info">{{ trip.location }}</p>
+        <p class="trip-info">{{ trip.date }}</p>
+        {% if trip.notes %}
+          <p class="trip-notes"><em>{{ trip.notes }}</em></p>
+        {% endif %}
+      </div>
+    </a>
   {% empty %}
-    <p>No trips added yet!</p>
+    <p class="no-trips">No trips added yet!</p>
   {% endfor %}
 </section>
 

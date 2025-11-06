@@ -6,98 +6,88 @@
 {% endblock %}
 
 {% block content %}
-<section class="car-container">
-  <div class="car-img">
-    <img src="{% static 'images/car2.gif' %}" alt="A driving car" />
+<section class="car-container card">
+
+  <!-- =========================
+       Car Header (Image + Title)
+  ========================= -->
+  <div class="car-header">
+    <img src="{% static 'images/car2.gif' %}" alt="{{ car.type }}" />
+    <div class="car-title">
+      <h1>{{ car.type }}</h1>
+      {% if car.year > 0 %}
+        <p class="car-subtitle">{{ car.year }} • {{ car.mileage }} miles</p>
+      {% else %}
+        <p class="car-subtitle">A classic Nissan</p>
+      {% endif %}
+    </div>
   </div>
 
+  <!-- =========================
+       Car Description & Actions
+  ========================= -->
   <div class="car-details">
-    <h1>{{ car.type }}</h1>
-
-    {% if car.year > 0 %}
-      <h2>I had a {{ car.year }} {{ car.type }} with {{ car.mileage }} miles!</h2>
-    {% else %}
-      <h2>A {{ car.type }} Nissan.</h2>
-    {% endif %}
-
     <p>{{ car.description }}</p>
 
     <div class="car-actions">
       <a href="{% url 'car-update' car.id %}" class="btn warn">Edit</a>
       <a href="{% url 'car-delete' car.id %}" class="btn danger">Delete</a>
     </div>
-
-    <!-- =============================== -->
-    <!-- 🚗 Car Dates Section -->
-    <!-- =============================== -->
-    <section class="car-date-section">
-      <div class="subsection-title">
-        <h2>Your Car Dates!</h2>
-        <div class="image-row">
-          <img src="{% static 'images/car2.gif' %}" alt="A car driving" class="icon-img" />
-          <img src="{% static 'images/doggy.gif' %}" alt="A dog driving" class="icon-img" />
-        </div>
-      </div>
-
-      <!-- Add Car Date Form -->
-      <h3>Add a Car Date</h3>
-      <form method="post" action="{% url 'cars_detail' car.id %}" autocomplete="off">
-        {% csrf_token %}
-        {{ cardate_form.as_p }}
-        <button type="submit" class="btn submit">Add Car Date</button>
-      </form>
-
-      <!-- Past Car Dates -->
-      <h3>Past Car Dates</h3>
-      {% if car.cardate_set.all %}
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Event</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for cardate in car.cardate_set.all %}
-              <tr>
-                <td>{{ cardate.date }}</td>
-                <td>{{ cardate.get_present_display }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% else %}
-        <div class="subsection-content">
-          <p>No dates recorded for this car yet!</p>
-        </div>
-      {% endif %}
-    </section>
-
-    <!-- =============================== -->
-    <!-- 🛣️ Car Trips Section -->
-    <!-- =============================== -->
-    <section class="cartrips">
-      <div class="subsection-title">
-        <h2>Car Trips</h2>
-        <img src="{% static 'images/car2.gif' %}" alt="Car icon" />
-      </div>
-
-      <!-- Car's Existing Trips -->
-      <h3>Trips This Car Has Been On</h3>
-     <div class="subsection-content">
-     {% if car_trips %}
-     {% for trip in car_trips %}
-      <div class="trip-item">
-        <p><strong>{{ trip.event_name }}</strong> — {{ trip.location }} ({{ trip.date }})</p>
-      </div>
-     {% endfor %}
-      {% else %}
-     <p>No trips associated with this car yet.</p>
-    {% endif %}
-    </div>
-
-    </section>
-
   </div>
+
+  <!-- Car Dates Section -->
+  <section class="car-date-section">
+    <h2>Your Car Dates!</h2>
+
+    <!-- Add Car Date Form -->
+    <h3>Add a Car Date</h3>
+    <form method="post" action="{% url 'cars_detail' car.id %}" autocomplete="off">
+      {% csrf_token %}
+      {{ cardate_form.as_p }}
+      <button type="submit" class="btn submit">Add Car Date</button>
+    </form>
+
+    <!-- Past Car Dates -->
+    <h3>Past Car Dates</h3>
+    {% if car.cardate_set.all %}
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Event</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cardate in car.cardate_set.all %}
+          <tr>
+            <td>{{ cardate.date }}</td>
+            <td>{{ cardate.get_present_display }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No dates recorded for this car yet!</p>
+    {% endif %}
+  </section>
+
+  <!-- Car Trips Section -->
+  <section class="car-trips">
+    <h2>Car Trips</h2>
+
+    {% if car_trips %}
+      <div class="trip-grid">
+        {% for trip in car_trips %}
+        <div class="trip-card card">
+          <div class="trip-info">
+            <h3>{{ trip.event_name }}</h3>
+            <p>{{ trip.location }} — {{ trip.date }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No trips associated with this car yet.</p>
+    {% endif %}
 </section>
 {% endblock %}

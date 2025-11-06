@@ -1,35 +1,36 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'css/cars/car-index.css' %}"
-/>
-{% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
 
-<section class="page-header">
-  <h1>Car list</h1>
-</section>
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cars/car-index.css' %}">
+{% endblock %}
 
-<section class="card-container">
-  {% for car in cars %}
-    <div class="card">
-     <a href="{% url 'cars_detail' car.id %}">
-        <div class="card-content">
-          <div class="card-img-container">
-            <img
-              src="{% static 'images/car2.gif' %}"
-              alt="dog driving"
-            />
-          </div>
-          <h2 class="card-title">{{ car.type }}</h2>
-          {% if car.year > 0 %}
-          <p>my {{ car.year }} year {{ car.type }} with an {{car.mileage}} mileage! </p>
-          {% else %}
-          <p>A {{ car.type }}.</p>
-          {% endif %}
-          <p><small>{{ car.description }}</small></p>
-        </div>
-      </a>
-    </div>
-  {% endfor %}
+{% block content %}
+<section class="car-index">
+  <section class="page-header">
+    <h1>All Cars</h1>
+    <p class="subtitle">Browse your collection of cars below</p>
+  </section>
+
+  <section class="car-grid">
+    {% for car in cars %}
+    <a href="{% url 'cars_detail' car.id %}" class="car-card card">
+      <div class="car-image">
+        <img src="{% static 'images/car2.gif' %}" alt="car image">
+      </div>
+      <div class="car-info">
+        <h2>{{ car.type }}</h2>
+        {% if car.year > 0 %}
+        <p>{{ car.year }} {{ car.type }} with {{ car.mileage }} miles</p>
+        {% else %}
+        <p>{{ car.type }}</p>
+        {% endif %}
+        <small>{{ car.description }}</small>
+      </div>
+    </a>
+    {% empty %}
+    <p class="no-cars">No cars added yet. <a href="{% url 'car-create' %}">Add one now.</a></p>
+    {% endfor %}
+  </section>
 </section>
 {% endblock %}

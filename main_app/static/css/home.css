@@ -1,86 +1,70 @@
+/* static/css/home.css */
+
 main {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  height: 100%;
-}
-
-main > section {
-  width: 100%;
-  padding: 10px 8px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background-color: #f8f9fb;
 }
 
-.header-logo-container {
-  display: none;
-}
-
-.logo-container {
-  max-width: 375px;
-}
-
-.car-container {
-  width: 80%;
-}
-
-.login {
+.card {
+  width: 280px;
+  background: white;
+  border: 1px solid #d3d3d3;
+  border-radius: 0; /* square edges */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.login h1 {
-  font-size: clamp(3.2rem, 3vw, 4.8rem);
-  margin: 10px 0;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.login > p {
-  display: flex;
-  flex-direction: column;
+.card img {
   width: 100%;
-  margin: 14px 0 0px;
+  height: 180px;
+  object-fit: cover;
 }
 
-.login label {
-  font-size: var(--font-reg);
-  margin-bottom: 6px;
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.login input {
-  font-size: var(--font-l);
-  padding: 2px 4px;
+.card-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #111;
 }
 
-.login .btn {
-  align-self: flex-end;
-  margin-right: 0;
-  margin-top: 16px;
+.card-content p {
+  font-size: 1.4rem;
+  color: #555;
+  margin-bottom: 1rem;
 }
 
-@media only screen and (min-width: 768px) {
-  main {
-    justify-content: space-around;
-  }
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
 
-  main > section {
-    width: 40%;
-  }
+.card-actions a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #2563eb;
+  transition: color 0.2s ease;
+}
 
-  .login {
-    border: var(--borders);
-    padding: 20px;
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--card-box-shadow);
-    width: 100%;
-  }
-
-  .logo-container {
-    max-width: 520px;
-  }
+.card-actions a:hover {
+  color: #1d4ed8;
 }

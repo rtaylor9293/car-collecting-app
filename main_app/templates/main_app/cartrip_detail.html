@@ -1,19 +1,30 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/cartrips/cartrip-detail.css' %}" />
-{% endblock %} 
+{% endblock %}
+
 {% block content %}
 
-<div class="card" style="border-color: {{ cartrips.color }}">
-  <div class="card-bg" style="background-color: {{ cartrips.color }}"></div>
-  <div class="card-content">
-    <h2>{{ cartrips.event_name }}</h2>
-      <p>Your trip to {{ cartrip.location }} on {{ cartrip.date }}</p>
+<section class="cartrip-container card">
+  
+  <!-- Card Content -->
+  <div class="cartrip-content">
+    <h1>{{ cartrip.event_name }}</h1>
+    <p class="trip-info">Location: {{ cartrip.location }}</p>
+    <p class="trip-info">Date: {{ cartrip.date }}</p>
+    {% if cartrip.notes %}
     <p><strong>Notes:</strong> {{ cartrip.notes }}</p>
+    {% endif %}
   </div>
-</div>
-<a href="{% url 'cartrip-update' cartrip.id %}" class="btn warn">Edit</a>
-<a href="{% url 'cartrip-delete' cartrip.id %}" class="btn danger">Delete</a>
+
+  <!-- Actions -->
+  <div class="cartrip-actions">
+    <a href="{% url 'cartrip-update' cartrip.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'cartrip-delete' cartrip.id %}" class="btn danger">Delete</a>
+  </div>
+
+</section>
 
 {% endblock %}
