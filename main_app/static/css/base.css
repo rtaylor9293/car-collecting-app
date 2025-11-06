@@ -1,0 +1,85 @@
+main {
+  display: flex;
+  flex-wrap: wrap;                /* allows cards to wrap nicely on smaller screens */
+  justify-content: center;        /* center cards instead of left-aligned */
+  gap: 25px;                      /* clean space between cards */
+  padding: 30px 20px;
+  min-height: 70vh;
+}
+
+/* Individual Car Card */
+.card {
+  width: 250px;
+  height: 250px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Background image overlay */
+.card-bg {
+  opacity: 0.25;
+  position: absolute;
+  inset: 0; /* shorthand for top/left/right/bottom: 0 */
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover .card-bg {
+  opacity: 0.4;
+}
+
+/* Content on top of the image */
+.card-content {
+  position: relative;
+  z-index: 1;
+  padding: 15px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(255,255,255,0.9) 30%, rgba(255,255,255,0.3) 90%);
+  border-radius: 12px;
+  color: var(--text-color);
+}
+
+.card h2 {
+  margin: 5px 0 2px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #475569;
+}
+
+/* Button inside card */
+.card .btn {
+  margin-top: 10px;
+  align-self: flex-start;
+  font-size: 1.3rem;
+  background-color: var(--nav-bg-ff);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  transition: background-color 0.2s ease;
+}
+
+.card .btn:hover {
+  background-color: var(--link-hover-color);
+}

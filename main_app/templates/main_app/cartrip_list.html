@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cartrips/cartrip-index.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>All Car Trips</h1>
+</section>
+
+<section class="card-container">
+  {% for trip in cartrip_list %}
+    <div class="card">
+      <a href="{% url 'cartrip-detail' trip.id %}">
+        <div class="card-content">
+          <h2>{{ trip.event_name }}</h2>
+          <p>{{ trip.location }}</p>
+          <p>{{ trip.date }}</p>
+          {% if trip.notes %}
+            <p><em>{{ trip.notes }}</em></p>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+  {% empty %}
+    <p>No trips added yet!</p>
+  {% endfor %}
+</section>
+
+{% endblock %}

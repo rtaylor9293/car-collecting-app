@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/cars/car-index.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <h1>Car list</h1>
+</section>
+
+<section class="card-container">
+  {% for car in cars %}
+    <div class="card">
+     <a href="{% url 'cars_detail' car.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img
+              src="{% static 'images/car2.gif' %}"
+              alt="dog driving"
+            />
+          </div>
+          <h2 class="card-title">{{ car.type }}</h2>
+          {% if car.year > 0 %}
+          <p>my {{ car.year }} year {{ car.type }} with an {{car.mileage}} mileage! </p>
+          {% else %}
+          <p>A {{ car.type }}.</p>
+          {% endif %}
+          <p><small>{{ car.description }}</small></p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}
