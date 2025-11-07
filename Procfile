@@ -1,1 +1,1 @@
-wegit checkout -b mainb: gunicorn carcollector.wsgi
+web: gunicorn carcollector.wsgi
