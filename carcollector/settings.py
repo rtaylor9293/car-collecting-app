@@ -1,33 +1,32 @@
 from pathlib import Path
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 import dj_database_url
-load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Load local environment variables from .env
+load_dotenv()
+
+# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# -----------------------------
+# SECURITY SETTINGS
+# -----------------------------
+SECRET_KEY = os.getenv('SECRET_KEY')
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY not set. Make sure it's in .env or Heroku config vars.")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+# DEBUG: True locally, False on Heroku
+DEBUG = not ('ON_HEROKU' in os.environ)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'Spencer8211'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-if not 'ON_HEROKU' in os.environ:
-    DEBUG = True
-else:
-    DEBUG = False
-
+# Allow all hosts in production; adjust if needed
 ALLOWED_HOSTS = ["*"]
 
-
-# Application definition
-
+# -----------------------------
+# APPLICATION DEFINITION
+# -----------------------------
 INSTALLED_APPS = [
-    'main_app',
+    'main_app',  # replace with your apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +37,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # serves static files in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -47,12 +46,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'carcollector.urls'
+ROOT_URLCONF = 'carcollector.urls'  # replace with your project folder
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [],  # add template directories here if needed
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,78 +63,67 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'carcollector.wsgi.application'
+WSGI_APPLICATION = 'carcollector.wsgi.application'  # replace with your project folder
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# -----------------------------
+# DATABASE CONFIGURATION
+# -----------------------------
 if 'ON_HEROKU' in os.environ:
+    # Use Heroku Postgres
     DATABASES = {
-        "default": dj_database_url.config(
+        'default': dj_database_url.config(
             env='DATABASE_URL',
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=True,
-        ),
+        )
     }
 else:
+    # Local development Postgres settings
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'carcollector',
-
+            'NAME': 'carcollector',  # replace with your local DB name
+            'USER': 'your_db_user',
+            'PASSWORD': 'your_db_password',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
+# -----------------------------
+# PASSWORD VALIDATION
+# -----------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
+# -----------------------------
+# INTERNATIONALIZATION
+# -----------------------------
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
+# -----------------------------
+# STATIC FILES
+# -----------------------------
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Heroku collects static files here
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = 'static/'
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
+# -----------------------------
+# LOGIN REDIRECTS
+# -----------------------------
 LOGIN_URL = 'home'
-
-
 LOGIN_REDIRECT_URL = 'car-index'
-
 LOGOUT_REDIRECT_URL = 'home'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
+# -----------------------------
+# DEFAULT AUTO FIELD
+# -----------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
