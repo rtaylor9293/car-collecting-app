@@ -1,83 +1,52 @@
-/* Ensure cards scale properly */
 .car-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 40px;
 }
 
 .car-card {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: #111;
-  border: 1.5px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  background-color: #fff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
   overflow: hidden;
 }
 
 .car-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
 }
 
-.car-image img {
+.car-card img {
   width: 100%;
-  height: auto;
-  max-height: 180px;
+  height: 180px;
   object-fit: cover;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 }
 
-.car-info {
-  padding: 0.8rem 1rem;
+.car-card h3 {
+  color: #ff8c42;
+  margin: 15px 0 5px;
 }
 
-.car-info h2 {
-  font-size: 1.6rem;
-  margin-bottom: 4px;
+.car-card p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.btn {
+  margin: 15px 0;
+  background: linear-gradient(90deg, #42a5f5, #7e57c2);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
   font-weight: 600;
+  transition: 0.3s;
 }
 
-.car-info p {
-  font-size: 1.2rem;
-  margin: 2px 0;
-  color: #444;
-}
-
-.car-info small {
-  font-size: 1rem;
-  color: #777;
-}
-
-.no-cars {
-  grid-column: 1 / -1;
-  text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-}
-
-/* Responsive adjustments */
-@media (min-width: 768px) {
-  .page-header h1 {
-    font-size: 2.8rem;
-  }
-  .subtitle { font-size: 1.4rem; }
-  .car-info h2 { font-size: 1.8rem; }
-  .car-info p { font-size: 1.4rem; }
-  .car-info small { font-size: 1.2rem; }
-}
-
-@media (min-width: 1200px) {
-  .page-header h1 { font-size: 3rem; }
-  .subtitle { font-size: 1.6rem; }
-  .car-info h2 { font-size: 2rem; }
-  .car-info p { font-size: 1.5rem; }
-  .car-info small { font-size: 1.4rem; }
+.btn:hover {
+  opacity: 0.85;
 }

@@ -17,7 +17,6 @@ urlpatterns = [
     path('cartrips/', views.CarTripsList.as_view(), name='cartrip-index'),
     path('cartrips/<int:pk>/update/', views.CarTripUpdate.as_view(), name='cartrip-update'),
     path('cartrips/<int:pk>/delete/', views.CarTripDelete.as_view(), name='cartrip-delete'),
-    # Include built-in auth urls
     path('accounts/signup/', views.signup, name='signup'),
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 

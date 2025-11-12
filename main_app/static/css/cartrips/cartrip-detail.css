@@ -1,41 +1,30 @@
-.cartrip-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  background-color: #fff;
+.trip-detail {
+  background: white;
+  border-radius: 25px;
+  margin: 40px auto;
+  max-width: 700px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
-.cartrip-content h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+.trip-detail h1 {
+  color: #ff5277;
+  margin-bottom: 10px;
 }
 
-.cartrip-content .trip-info {
-  font-size: 1.2rem;
+.trip-detail h2 {
+  color: #42a5f5;
+  margin-bottom: 20px;
+}
+
+.trip-detail p {
   color: #444;
-  margin-bottom: 0.3rem;
+  line-height: 1.6;
 }
 
-.cartrip-actions {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+.trip-detail img {
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 20px;
 }
-
-.btn {
-  border-radius: 5px;
-  padding: 0.8rem 1.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  color: #fff;
-  transition: background 0.2s ease;
-}
-
-.btn.warn { background-color: #fbbf24; }
-.btn.warn:hover { background-color: #d59a1c; }
-
-.btn.danger { background-color: #ef4444; }
-.btn.danger:hover { background-color: #c53030; }

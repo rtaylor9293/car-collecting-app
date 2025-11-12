@@ -1,78 +1,32 @@
-/* =========================
-   Page Header
-========================= */
-.page-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.page-header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 0.3rem;
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  color: #555;
-}
-
-/* =========================
-   Card Container
-========================= */
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  width: 95%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* =========================
-   Trip Card
-========================= */
-.card {
+.trip-container {
   display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: #111;
-  border: 1.5px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  background-color: #fff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 40px 20px;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.trip-card {
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  color: #333;
+  border-radius: 20px;
+  padding: 25px;
+  width: 280px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card-content {
-  padding: 1rem;
+.trip-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 35px rgba(0,0,0,0.25);
 }
 
-.card-content h2 {
-  font-size: 1.6rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+.trip-card h3 {
+  color: #ff5277;
+  margin-bottom: 10px;
 }
 
-.card-content .trip-info {
-  font-size: 1.2rem;
-  color: #444;
-  margin: 0.2rem 0;
-}
-
-.card-content .trip-notes {
-  font-size: 1rem;
+.trip-card p {
+  font-size: 0.95rem;
   color: #555;
-  margin-top: 0.3rem;
-}
-
-.no-trips {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  grid-column: 1 / -1;
 }
